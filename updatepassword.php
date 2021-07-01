@@ -1,6 +1,6 @@
 <?php
 include('../config.php');
-$q=mysqli_query($con,"select * from teacher where teacher_id='".$_SESSION['teacher_id']."'");
+$q=mysqli_query($con,"select * from student where stu_id='".$_SESSION['stu_id']."'");
 $res=mysqli_fetch_assoc($q);
 $opass=$res['password'];
 extract($_POST);
@@ -16,7 +16,7 @@ if(isset($update))
 		{
 			if($np==$cp)
 			{
-			mysqli_query($con,"UPDATE teacher SET password='$np' where teacher_id='".$_SESSION['teacher_id']."'");
+			mysqli_query($con,"UPDATE student SET password='$np' where stu_id='".$_SESSION['stu_id']."'");
 			$err="<font color='blue'>Password Updated</font>";
 			}
 			else
@@ -34,10 +34,9 @@ if(isset($update))
  
               <div class="row" style="height:700px">
 <div class="col-md-5"> 
-           <br><br>
-               <h2>Update Password</h2>
+           
+               <h2><font color="#FFFFFF">Update Password</font></h2>
 <form method="POST" enctype="multipart/form-data">
-
   <table border="0" cellspacing="5" cellpadding="5" class="table">
   
  
@@ -46,17 +45,17 @@ if(isset($update))
   <th><h3><?php echo $err; ?></h3></th>
   </tr>
   <tr>
-    <th width="237" scope="row">Old Password </th>
+    <th width="237" scope="row"><font color="" size="+1">Old Password</font> </th>
     <td width="213"><input type="text" name="op" class="form-control" value="<?php echo $res['password'];?>"/></td>
   </tr>
   
   <tr>
-    <th width="237" scope="row">New Password </th>
+    <th width="237" scope="row"><font color="" size="+1">New Password </font></th>
     <td width="213"><input type="password" name="np" class="form-control" value="<?php echo $np; ?>"/></td>
   </tr>
   
   <tr>
-    <th width="237" scope="row">Confirm Password </th>
+    <th width="237" scope="row"><font color="" size="+1">Confirm Password</font> </th>
     <td width="213"><input type="password" name="cp" class="form-control" value="<?php echo $cp; ?>"/></td>
   </tr>
   

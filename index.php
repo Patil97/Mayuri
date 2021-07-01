@@ -11,14 +11,16 @@ if(isset($save))
 	else
 	{
 	//check login crenditial
-	$que=mysqli_query($con,"select * from teacher where eid='".$e."' and password='".$p."'");
+	$que=mysqli_query($con,"select * from student where eid='".$e."' and password='".$p."'");
 	$r=mysqli_num_rows($que);
 	$res=mysqli_fetch_array($que);	
 	if($r)
 		{
 		$_SESSION['name']=$res['name'];
-		$_SESSION['teacher_id']=$res['teacher_id'];
-		echo "<script>window.location='staffdashboard.php'</script>";
+		$_SESSION['stu_id']=$res['stu_id'];
+		$_SESSION['e_id']=$e;
+
+		echo "<script>window.location='studentdashboard.php'</script>";
 		}
 		else
 		{
@@ -91,7 +93,7 @@ if(isset($save))
             <div class="row" align="center">
 <div class="col-md-5" align="center">
                <form class="form-signin" method="POST">
-	    <h1 class="form-signin-heading"><font color="black" size="+6">Staff Login</font></h2>
+	    <h1 class="form-signin-heading"><font color="black" size="+6">Student Login</font></h2>
          <h3><?php echo $err; ?></h3>
         <label for="inputEmail" class="sr-only">Email</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus 
@@ -103,10 +105,10 @@ if(isset($save))
         name="p" value="<?php echo @$p;?>"/>
         <div class="checkbox">
          
-        </div>
-        <input type="submit" value="Login " name="save" class="btn btn-primary" />
-       <a href="../index.php" class="btn btn-danger">Home</a>
-		
+        </div><br/>
+        <input type="submit" value="Login " name="save"class="btn btn-primary"/>
+        
+		<a href="../index.php" class="btn btn-danger">Home</a>
       </form>
             </div>
         </div>

@@ -23,44 +23,53 @@
 }
 </style>
 <?php 
+include('../config.php');
 echo "<br><br><br>";
 echo "<table id='customers'>";
 
 echo "<Tr>
-<th><font >Time Schdule Id</font></th>
 <th><font >Department</font></th>
+<th><font >Semester</font></th>
 <th><font >Subject Name</font></th>
-<th><font >Semester Name</font></th>
 <th><font >Teacher Name</font></th>
-<th><font>Time</font></th>
 <th><font >Date</font></th>
-<th><font >Day</font></th>
+<th><font >Time</font></th>
+<th>Day</th>
 
 </tr>";
+//get user's semester id
 
-$que=mysqli_query($con,"select *  from timeschedule where teacher_id='".$_SESSION['teacher_id']."'");
+   
+   
+$que4=mysqli_query($con,"select * from student where eid='".$_SESSION['e_id']."'");
+$res4=mysqli_fetch_array($que4);
+
+
+	$que=mysqli_query($con,"select *  from timeschedule where semester_name='".$res4['sem_id']."'");
 	while($res=mysqli_fetch_array($que))
 	{
-	echo "<tr>";
-	echo "<td >".$res['timeschedule_id']."</td>" ;
+	echo "<Tr>";
+	
+	
 	
 	//display department name
-	$que2=mysqli_query($con,"select *  from department where department_id='".$res['department_name']."'");
-	$res2=mysqli_fetch_array($que2);
+	$que22=mysqli_query($con,"select *  from department where department_id='".$res['department_name']."'");
+	$res22=mysqli_fetch_array($que22);
 	
-	echo "<td >".$res2['department_name']."</td>" ;
+	echo "<td >".$res22['department_name']."</td>" ;
+	
+	
+	//display semester name
+	$que4=mysqli_query($con,"select *  from semester where sem_id='".$res4['sem_id']."'");
+	$res4=mysqli_fetch_array($que4);
+	echo "<td >".$res4['semester_name']."</td>" ;
 	
 	
 	
 	//display subject name
-	$que3=mysqli_query($con,"select *  from subject where subject_id='".$res['subject_name']."'");
-	$res3=mysqli_fetch_array($que3);
-	echo "<td >".$res3['subject_name']."</td>" ;
-	
-	//display semester name
-	$que4=mysqli_query($con,"select *  from semester where sem_id='".$res['semester_name']."'");
-	$res4=mysqli_fetch_array($que4);
-	echo "<td >".$res4['semester_name']."</td>" ;
+	$que33=mysqli_query($con,"select *  from subject where subject_id='".$res['subject_name']."'");
+	$res33=mysqli_fetch_array($que33);
+	echo "<td >".$res33['subject_name']."</td>" ;
 	
 	
 	//display teacher name
@@ -68,15 +77,17 @@ $que=mysqli_query($con,"select *  from timeschedule where teacher_id='".$_SESSIO
 	$res5=mysqli_fetch_array($que5);
 	echo "<td >".$res5['name']."</td>" ;
 	
-	echo "<td >".$res['time']."</td>" ;
+	
 	echo "<td >".$res['date']."</td>" ;
-	echo "<td >".$res['day']."</td>" ;
-
+	echo "<td >".$res['time']."</td>" ;
+		echo "<td>".$res['day']."</td>" ;
+				
 	?>
-   
-	<?php
+    
+	<?php 
 	echo "</tr>";
 	}
-	echo "</table>";	
+	
+echo "</table>";	
 
 ?>
