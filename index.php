@@ -1,8 +1,6 @@
 <?php 
-session_start(); 
+session_start();
 require('../config.php');
-?>
-<?php
 extract($_POST);
 if(isset($save))
 {
@@ -13,12 +11,14 @@ if(isset($save))
 	else
 	{
 	//check login crenditial
-	$que=mysqli_query($con,"select * from admin where user_name='".$e."' and password='".$p."'");
+	$que=mysqli_query($con,"select * from teacher where eid='".$e."' and password='".$p."'");
 	$r=mysqli_num_rows($que);
-		if($r)
+	$res=mysqli_fetch_array($que);	
+	if($r)
 		{
-			$_SESSION['admin']=$e;
-			header('location:admindashboard.php');
+		$_SESSION['name']=$res['name'];
+		$_SESSION['teacher_id']=$res['teacher_id'];
+		echo "<script>window.location='staffdashboard.php'</script>";
 		}
 		else
 		{
@@ -30,13 +30,13 @@ if(isset($save))
 }
 ?>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<html lang="en">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +55,7 @@ if(isset($save))
 </style>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -63,24 +63,26 @@ if(isset($save))
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" href="../css/animate.min.css" type="text/css">
-    <script src="../js/jquery-2.1.3.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+    <script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/creative.css" type="text/css">
-    <link href="../css/owl.carousel.css" rel="stylesheet">
-    <link href="../css/owl.theme.css" rel="stylesheet">
-    <link href="../css/owl.transitions.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
+    <link href="css/owl.transitions.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     
     <![endif]-->
 
 </head>
-
- <body>
- 
+    <body>
+    
+      <!-- /.navbar -->
+    
+   
       <!-- /.slider -->
 
 <header>
@@ -89,9 +91,9 @@ if(isset($save))
             <div class="row" align="center">
 <div class="col-md-5" align="center">
                <form class="form-signin" method="POST">
-	    <h1 class="form-signin-heading"><font color="black" size="+6">Admin Login</font></h2>
-        <h3><?php echo $err; ?></h3>
-        <label for="inputEmail" class="sr-only">User Name</label>
+	    <h1 class="form-signin-heading"><font color="black" size="+6">Staff Login</font></h2>
+         <h3><?php echo $err; ?></h3>
+        <label for="inputEmail" class="sr-only">Email</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus 
         name="e" value="<?php echo @$e;?>"/>
         
@@ -101,34 +103,31 @@ if(isset($save))
         name="p" value="<?php echo @$p;?>"/>
         <div class="checkbox">
          
-        </div><br/>
-        <input type="submit" value="Login " name="save" class="btn btn-danger"/>
-            <a href="../index.php" class="btn btn-danger">Home</a>
+        </div>
+        <input type="submit" value="Login " name="save" class="btn btn-primary" />
+       <a href="../index.php" class="btn btn-danger">Home</a>
 		
       </form>
             </div>
-        </div>
-        </div>
         </div>
     </header>
 
 <!--container-->
 
 
-
   
 <footer class="container-fluid">
- <p align="center">All rights reserved by college</p>
+  <p align="center">All rights reserved by college</p>
 </footer>
     
       <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- Plugin JavaScript -->
     
-    <script src="../js/owl.carousel.js"></script>
+    <script src="js/owl.carousel.js"></script>
                          
 
     </body>
